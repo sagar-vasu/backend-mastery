@@ -69,57 +69,57 @@ I also initially set response headers before deciding which route was being hand
 - CommonJS vs ES Modules
 - `process`
 - environment variables
+## Phase 1 — Node.js Core Complete
 
-## Phase 1 — Async File Operations
+### Completed
 
-### Studied
+* Node.js runtime fundamentals
+* Event loop
+* Blocking vs non-blocking behavior
+* Callbacks
+* Promises
+* async/await
+* CommonJS
+* ES Modules
+* `process`
+* environment variables
+* `dotenv`
+* `fs`
+* `path`
+* npm scripts
+* package.json
+* semantic versioning
+* error handling
+* exit codes
+* raw Node.js HTTP server
 
-* Promise-based Node.js file-system APIs
-* `async` functions
-* `await`
-* rejected Promises
-* `try/catch`
-* synchronous vs asynchronous I/O
+### Final Exercise
 
-### Built
+Refactored the raw HTTP server to:
 
-Created an asynchronous file-system exercise using:
+* use environment-based configuration
+* use reusable JSON response handling
+* support multiple routes
+* return appropriate HTTP status codes
+* keep configuration outside application logic
 
-```js
-require("fs/promises")
-```
+### What I Can Explain Now
 
-Practiced:
+I can explain:
 
-```js
-await fs.writeFile()
-await fs.readFile()
-```
+* what a Node.js process is
+* why blocking JavaScript is dangerous on a backend
+* how asynchronous work behaves
+* callbacks vs Promises vs async/await
+* CommonJS vs ES Modules
+* how environment variables work
+* why `.env` should not be committed
+* how Node reads and writes files
+* what package.json does
+* what npm scripts do
+* what semantic versioning means
+* how a raw Node HTTP server handles requests and responses
 
-### What I Learned
+### Next Phase
 
-Many backend operations do not complete immediately.
-
-Instead of blocking JavaScript while waiting for I/O, Node.js commonly uses asynchronous operations that return Promises.
-
-`async/await` gives Promise-based code a readable structure.
-
-Errors from awaited Promises can be handled using `try/catch`.
-
-### Backend Importance
-
-The same async/await pattern will later be used for:
-
-* PostgreSQL queries
-* Prisma queries
-* Redis
-* external APIs
-* AI APIs
-* background jobs
-* file operations
-
-### Next
-
-* deeper Promise behavior
-* callbacks vs Promises
-* Node.js error handling
+Phase 2 — SQL and PostgreSQL
