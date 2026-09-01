@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node exercises/phase-01/raw-http-server/server.js",
     "event-loop": "node exercises/phase-01/event-loop.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "call-back":"node exercises/phase-01/promise-example.js"
   },
   "keywords": [],
   "author": "",
