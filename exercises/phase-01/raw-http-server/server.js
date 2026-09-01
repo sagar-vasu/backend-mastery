@@ -1,56 +1,47 @@
 const http = require("http");
+require("dotenv").config();
+
+const PORT = process.env.PORT || 3000;
+
+function sendJson(res, statusCode, data) {
+  res.writeHead(statusCode, {
+    "Content-Type": "application/json",
+  });
+
+  res.end(JSON.stringify(data));
+}
 
 const server = http.createServer((req, res) => {
   if (req.method === "GET" && req.url === "/") {
-    res.writeHead(200, {
-      "Content-Type": "application/json",
+    return sendJson(res, 200, {
+      message: "Backend Mastery API",
     });
-
-    res.end(
-      JSON.stringify({
-        message: "Backend Mastery API",
-      }),
-    );
-  } else if (req.method === "GET" && req.url === "/health") {
-    res.writeHead(200, {
-      "Content-Type": "application/json",
-    });
-
-    res.end(
-      JSON.stringify({
-        status: "ok",
-      }),
-    );
-  } else if (req.method === "GET" && req.url === "/users") {
-    res.writeHead(200, {
-      "Content-Type": "application/json",
-    });
-
-    res.end(
-      JSON.stringify([
-        {
-          id: 1,
-          name: "Sagar",
-        },
-        {
-          id: 2,
-          name: "Sara",
-        },
-      ]),
-    );
-  } else {
-    res.writeHead(404, {
-      "Content-Type": "application/json",
-    });
-
-    res.end(
-      JSON.stringify({
-        error: "Route not found!",
-      }),
-    );
   }
+
+  if (req.method === "GET" && req.url === "/health") {
+    return sendJson(res, 200, {
+      status: "ok",
+    });
+  }
+
+  if (req.method === "GET" && req.url === "/users") {
+    return sendJson(res, 200, [
+      {
+        id: 1,
+        name: "Sagar",
+      },
+      {
+        id: 2,
+        name: "Sara",
+      },
+    ]);
+  }
+
+  return sendJson(res, 404, {
+    error: "Route not found",
+  });
 });
 
-server.listen(3000, () => {
-  console.log("Server running on http://localhost:3000");
+server.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });
