@@ -1,85 +1,99 @@
-# HTTP & Client/Server Model
+# HTTP Fundamentals
 
-## Client/Server Model
+## What is HTTP?
 
-A React application is a **client**. It sends HTTP requests to a backend server, and the server processes the request and returns a response.
+HTTP is the protocol used by clients and servers to communicate.
 
-```text
-React Client
-    ↓
-HTTP Request
-    ↓
-Backend Server
-    ↓
-Database
-    ↓
-Backend Server
-    ↓
-HTTP Response
-    ↓
-React Client
-```
+A client sends a request, and the server sends back a response.
 
-The backend is responsible for:
+In my first backend exercise, the browser acted as the client and my Node.js server handled the request.
 
-* Validating requests
-* Authentication
-* Authorization
-* Business logic
-* Database operations
-* Error handling
-* Returning the correct HTTP status
+## Client and Server
+
+The client sends a request such as:
+
+GET /users
+
+The server receives that request, checks the HTTP method and URL, then decides what response to return.
 
 ## HTTP Request
 
-An HTTP request contains:
+A request can contain:
 
-* **Method** — GET, POST, PUT, PATCH, DELETE
-* **Path** — e.g. `/api/users/42`
-* **Headers** — authentication and other metadata
-* **Body** — data sent to the server, usually for POST/PUT/PATCH
+* HTTP method
+* URL or path
+* headers
+* optional body
 
-Example:
+Common methods:
 
-```http
-GET /api/users/42
-Authorization: Bearer abc123
-Accept: application/json
+* GET — retrieve data
+* POST — create data
+* PUT — replace data
+* PATCH — update part of existing data
+* DELETE — remove data
+
+## HTTP Response
+
+A response can contain:
+
+* status code
+* headers
+* response body
+
+In my Node.js server, I returned JSON responses using:
+
+```js
+res.end(JSON.stringify(data));
 ```
 
-## HTTP Methods
+I also used the `Content-Type` header:
 
-| Method | Purpose               |
-| ------ | --------------------- |
-| GET    | Read data             |
-| POST   | Create data           |
-| PUT    | Replace data          |
-| PATCH  | Partially update data |
-| DELETE | Remove data           |
-
-## Important Status Codes
-
-```text
-200 = Success
-201 = Created
-204 = Success with no content
-
-400 = Bad Request
-401 = Not authenticated
-403 = Not authorized
-404 = Not Found
-409 = Conflict
-422 = Validation error
-500 = Server error
+```js
+res.writeHead(200, {
+  "Content-Type": "application/json",
+});
 ```
 
-### Key Difference
+This tells the client that the response body contains JSON.
 
-```text
-401 = Who are you?
-403 = I know who you are, but you're not allowed.
+## Status Codes I Used
+
+### 200 OK
+
+Used when a request succeeds.
+
+Examples:
+
+* GET /
+* GET /health
+* GET /users
+
+### 404 Not Found
+
+Used when the requested route does not exist.
+
+Example response:
+
+```json
+{
+  "error": "Route not found!"
+}
 ```
 
-## Key Takeaway
+## What I Learned From the Exercise
 
-**Client requests → Server validates and processes → Database provides data → Server responds → Client updates the UI.**
+A Node.js backend can listen for HTTP requests without using Express.
+
+The `http.createServer()` function receives a request object and a response object.
+
+The request object contains information such as:
+
+```js
+req.method
+req.url
+```
+
+The response object is used to send the status, headers, and response body.
+
+I also learned that `res.end()` finishes the response. After calling it, I should not try to send another response for the same request.
