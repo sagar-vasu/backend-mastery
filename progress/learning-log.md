@@ -69,3 +69,57 @@ I also initially set response headers before deciding which route was being hand
 - CommonJS vs ES Modules
 - `process`
 - environment variables
+
+## Phase 1 — Async File Operations
+
+### Studied
+
+* Promise-based Node.js file-system APIs
+* `async` functions
+* `await`
+* rejected Promises
+* `try/catch`
+* synchronous vs asynchronous I/O
+
+### Built
+
+Created an asynchronous file-system exercise using:
+
+```js
+require("fs/promises")
+```
+
+Practiced:
+
+```js
+await fs.writeFile()
+await fs.readFile()
+```
+
+### What I Learned
+
+Many backend operations do not complete immediately.
+
+Instead of blocking JavaScript while waiting for I/O, Node.js commonly uses asynchronous operations that return Promises.
+
+`async/await` gives Promise-based code a readable structure.
+
+Errors from awaited Promises can be handled using `try/catch`.
+
+### Backend Importance
+
+The same async/await pattern will later be used for:
+
+* PostgreSQL queries
+* Prisma queries
+* Redis
+* external APIs
+* AI APIs
+* background jobs
+* file operations
+
+### Next
+
+* deeper Promise behavior
+* callbacks vs Promises
+* Node.js error handling
